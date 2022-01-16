@@ -17,7 +17,7 @@ GET: 	/Tree/Index/ 				Get tree, ascending order
 GET:	/Tree/Index/desc			Get tree, descending order
 
 GET:	/Tree/Add/{id}				Add form
-POST:	/Tree/Add					Create new node.
+POST:	/Tree/Add				Create new node.
 		Parameters:
 			Name
 			ParentId
