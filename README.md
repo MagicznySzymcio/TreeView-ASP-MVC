@@ -4,7 +4,7 @@ Lets you easily manage tree structure.
 - Add new nodes
 - Delete, edit or move existing nodes
 
-![Screenshot](screenshots/preview.png)
+![Screenshot](Screenshots/preview.png)
 ## Technologies
 - ASP.NET MVC 5
 - MSSQL
