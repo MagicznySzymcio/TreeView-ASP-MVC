@@ -1,0 +1,47 @@
+﻿@model ICollection<Node>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script src="https://unpkg.com/vue"></script>
+
+<div id="tree">
+    <select id="tree_select" class="form-select w-100" size="16" v-model="selected">
+        <option value="0" selected>/.</option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">
+                @Html.Raw(String.Concat(Enumerable.Repeat("&emsp;", item.Depth)))
+                @Html.DisplayFor(modelItem => item.Name)
+            </option>
+        }
+    </select>
+
+
+    <div class="row mt-2">
+        <div class="col-9">
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Add", "Tree")/' + encodeURIComponent(document.getElementById('tree_select').value);">Add</button>
+            <button :disabled="selected == '0'" type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "Tree")/' + encodeURIComponent(document.getElementById('tree_select').value);">Edit</button>
+            <button :disabled="selected == '0'" type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Delete", "Tree")/' + encodeURIComponent(document.getElementById('tree_select').value);">Delete</button>
+            <button :disabled="selected == '0'" type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Move", "Tree")/' + encodeURIComponent(document.getElementById('tree_select').value);">Move</button>
+        </div>
+        <div class="col-3">
+            <p class="text-right">
+                Order:
+                @if ((string)Url.ActionContext.RouteData.Values["sort"] == "desc")
+                    @Html.ActionLink("Ascending", "Index", "Tree", new { sort = "asc" })
+                else
+                    @Html.ActionLink("Descending", "Index", "Tree", new { sort = "desc" })
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    var tree = new Vue({
+        el: '#tree',
+        data: {
+            selected: '0'
+        }
+    })
+</script>
